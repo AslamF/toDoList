@@ -197,11 +197,9 @@ li:hover{
 }
 
 .toDoContainer{
-    
     width:66%;
-    border: 1px solid black;
-    padding: 5px;
-    height: 100%;
+    padding-top: 20px;
+    
 }
 .taskManagement{
     display: flex;
@@ -211,7 +209,7 @@ li:hover{
     height: 50px; 
 }
 .task{
-    height: 40px;
+    height: 50px;
     border-bottom: 1px solid yellow;
     display: flex;
     justify-content: space-between;
@@ -253,11 +251,8 @@ li:hover{
     color: green;
 }
 
-.taskDone{
-    text-decoration-line: line-through;
-}
 
-@media only screen and (max-width: 600px){
+@media only screen and (max-width: 700px){
     
     .bottom{
         flex-direction: column-reverse;

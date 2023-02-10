@@ -7,14 +7,14 @@ const projectForm = document.querySelector("[data-new-project-form");
 const projectFormInput = document.querySelector("[data-new-project-input");
 const deleteProject = document.querySelector(".btn-delete");
 const projectTitle = document.querySelector("[data-project-title]");
-
 const tasksContainer = document.querySelector("[data-tasks]");
 const taskTemplate = document.getElementById("taskTemplate");
 const newTaskForm = document.querySelector("[data-new-task-form]");
 const newTaskName = document.querySelector("[data-new-task-title]");
 const newTaskDate = document.querySelector("[data-new-task-date]");
 const newTaskPriority = document.querySelector("[data-new-task-priority]");
-
+const toDoContainer = document.querySelector(".toDoContainer");
+const deleteTask = document.querySelector(".DELETE");
 const LOCAL_STORAGE_PROJECTS_KEY = "projects.lists";
 const LOCAL_STORAGE_SELECTED_PROJECTS_KEY = "projects.selectedID";
 
@@ -60,6 +60,7 @@ function createTask(title, date, priority) {
     title,
     date,
     priority,
+
     complete: false,
   };
 }
@@ -83,6 +84,7 @@ deleteProject.addEventListener("click", (e) => {
   selectedProjectId = null;
   saveAndRender();
 });
+
 function saveAndRender() {
   save();
   render();
@@ -99,15 +101,30 @@ function render() {
   const selectedProject = projects.find(
     (project) => project.id === selectedProjectId
   );
-  projectTitle.innerText = selectedProject.name;
-  clearElement(tasksContainer);
-  renderTasks(selectedProject);
+
+  if (selectedProjectId == null) {
+    toDoContainer.style.display = "none";
+  } else {
+    toDoContainer.style.display = "";
+    projectTitle.innerText = selectedProject.name;
+    clearElement(tasksContainer);
+    renderTasks(selectedProject);
+    renderTaskCount(selectedProject);
+  }
 }
 
+function renderTaskCount(selectedProject) {
+  const incompleteTaskCount = selectedProject.tasks.filter(
+    (task) => !task.complete
+  ).length;
+  const taskString = incompleteTaskCount === 1 ? "task" : "tasks";
+}
 function renderTasks(selectedProject) {
   selectedProject.tasks.forEach((i) => {
     const taskElement = document.importNode(taskTemplate.content, true);
     const checkbox = taskElement.querySelector("input");
+    checkbox.id = i.id;
+    checkbox.checked = i.complete;
     const name = taskElement.querySelector("h4");
     const date = taskElement.querySelector(".dueDate");
 
@@ -116,6 +133,28 @@ function renderTasks(selectedProject) {
     tasksContainer.appendChild(taskElement);
   });
 }
+tasksContainer.addEventListener("click", (e) => {
+  if (e.target.tagName.toLowerCase() === "input") {
+    const selectedProject = projects.find(
+      (project) => project.id === selectedProjectId
+    );
+    const selectedTask = selectedProject.tasks.find(
+      (task) => task.id === e.target.id
+    );
+    selectedTask.complete = e.target.checked;
+    save();
+    renderTaskCount(selectedProject);
+  }
+});
+deleteTask.addEventListener("click", (e) => {
+  const selectedProject = projects.find(
+    (project) => project.id === selectedProjectId
+  );
+  selectedProject.tasks = selectedProject.tasks.filter(
+    (task) => !task.complete
+  );
+  saveAndRender();
+});
 
 function renderProjects() {
   projects.forEach((project) => {
@@ -137,7 +176,7 @@ function clearElement(element) {
 
 // LOgic for opening and clopsing form
 const formOperation = (() => {
-  document.querySelector(".formButton").addEventListener("click", () => {
+  document.querySelector(".ADD").addEventListener("click", () => {
     document.querySelector(".popup").classList.add("active");
   });
 
