@@ -20,7 +20,7 @@
         <div class="sidebar">
             
             <div class="menu">
-                <div class="item"><li>INBOX</li></div>
+                
                 
                 <div class="item">
                         <li class="sub-btn">PROJECTS<i class="fas fa-angle-right dropdown"></i></li> 
@@ -38,11 +38,7 @@
                 <div class="form-element">
                     <label for="title">Title:</label>
                     <input type="text" id="title" name="title" data-new-task-title>
-                </div>
-                <div class="form-element">
-                    <label for="description">Description:</label>
-                    <input type="text" id="description" name="description" data-new-task-desc>
-                </div>    
+                </div>  
                 <div class="form-element">
                     <label for="date">Date:</label>
                     <input type="date" id="date" name="date" data-new-task-date>
@@ -79,9 +75,11 @@
             <div class=toDoContainer>
                 
                 <div class="taskManagement">
-                    <h4 class="projectTitle" data-project-title>PROJECT NAME</h4>
-                    <button class="formButton fa fa-plus-square"></button>
-
+                    <h4 class="projectTitle" data-project-title></h4>
+                <div class="managementRightContainer">
+                    <button class= "formButton DELETE  fas fa-minus-square"></button>
+                    <button class="formButton ADD fa fa-plus-square"></button>
+                </div>
                 </div>
                 <div class="tasksContainer" data-tasks>
                     
@@ -118,8 +116,6 @@
                 </div>
                     <div class="info">
                         <button class="clickable flag fas fa-flag"></button>
-                        <button class="clickable information fas fa-bars"></button>
-                        <button class="clickable deleteTask fas fa-trash-alt"></button>
                     </div>
             </div>
 
