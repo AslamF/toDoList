@@ -6,11 +6,10 @@
 <script src="./main.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" charset="utf-8"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-<title>Document</title>
+<title>TO-DO LIST</title>
 <body>
     <div class="header">
-       
-        
+        GET SH#T DONE
     </div>
 
 
@@ -27,21 +26,24 @@
                         <div class="sub-menu">
                         </div>
                 </div>
-                <button class="btn-add">ADD PROJECT</button>
-                <button class="btn-delete">DEL PROJECT</button>
+                <div class="btn-container">
+                    <button class="btn-add">CREATE</button>
+                    <button class="btn-delete">DELETE</button>
+                </div>
             </div>  
         </div>
+     
         <div class="popup">
             <div class="close-btn fa fa-close"></div>
             <form data-new-task-form>
-                <h2>What To-Do?</h2>
+                <h2>What-To-Do?</h2>
                 <div class="form-element">
                     <label for="title">Title:</label>
-                    <input type="text" id="title" name="title" data-new-task-title>
+                    <input type="text" id="title" name="title" maxlength="35" data-new-task-title>
                 </div>  
                 <div class="form-element">
                     <label for="date">Date:</label>
-                    <input type="date" id="date" name="date" data-new-task-date>
+                    <input type="date" id="date" name="date" max="2030-12-31" data-new-task-date>
                 </div>
                 <div class="form-element">
                     <label for="priority">Priority:</label>
@@ -55,7 +57,9 @@
                     <input type="submit" class="submit" value="submit">
                 </div>
             </form>
-        </div>    
+        </div>
+       
+           
 
         <div class="popup2">
             <div class="close-btn2 fa fa-close"></div>
